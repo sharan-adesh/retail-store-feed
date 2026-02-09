@@ -23,27 +23,50 @@ export const EditModal: React.FC<EditModalProps> = ({ open, record, onClose, onS
   if (!open || !record) return null
 
   const handleSave = async () => {
+    if (!productName.trim()) {
+      return
+    }
     setSaving(true)
-    const success = await onSave({ product_name: productName, price })
+    const success = await onSave({ product_name: productName.trim(), price })
     setSaving(false)
     if (success) onClose()
   }
+
+  const isValid = productName.trim().length > 0 && price.trim().length > 0
 
   return (
     <div style={backdropStyle}>
       <div style={modalStyle}>
         <h3>Edit Record #{record.id}</h3>
         <div style={{ marginBottom: 8 }}>
-          <label>Product name</label>
-          <input value={productName} onChange={(e) => setProductName(e.target.value)} style={{ width: '100%' }} />
+          <label>Product name <span style={{ color: 'red' }}>*</span></label>
+          <input
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
+            style={{ width: '100%' }}
+            placeholder="Enter product name"
+          />
         </div>
         <div style={{ marginBottom: 8 }}>
-          <label>Price</label>
-          <input value={price} onChange={(e) => setPrice(e.target.value)} style={{ width: '100%' }} />
+          <label>Price <span style={{ color: 'red' }}>*</span></label>
+          <input
+            type="number"
+            step="0.01"
+            min="0"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            style={{ width: '100%' }}
+            placeholder="Enter price"
+          />
         </div>
+        {!isValid && (
+          <p style={{ color: 'red', fontSize: '12px', marginTop: 4 }}>
+            Product name and price are required
+          </p>
+        )}
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
           <button onClick={onClose} disabled={saving}>Cancel</button>
-          <button onClick={handleSave} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
+          <button onClick={handleSave} disabled={saving || !isValid}>{saving ? 'Saving...' : 'Save'}</button>
         </div>
       </div>
     </div>

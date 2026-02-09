@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { searchPrices, updatePrice, deletePrice } from '../api/priceApi.js'
 import { PriceRecord, SearchQuery } from '../types/index.js'
+import toast from 'react-hot-toast'
 
 interface UsePricesState {
   query: SearchQuery
   results: PriceRecord[]
   loading: boolean
-  error: string | null
 }
 
 export const usePrices = () => {
@@ -18,7 +18,6 @@ export const usePrices = () => {
     },
     results: [],
     loading: false,
-    error: null,
   })
 
   // Perform search on mount
@@ -32,7 +31,7 @@ export const usePrices = () => {
 
   const search = async (customQuery?: SearchQuery) => {
     const queryToUse = customQuery || state.query
-    setState((prev) => ({ ...prev, loading: true, error: null }))
+    setState((prev) => ({ ...prev, loading: true }))
 
     try {
       const results = await searchPrices(queryToUse)
@@ -43,10 +42,10 @@ export const usePrices = () => {
       }))
     } catch (error: any) {
       const errorMessage = error.response?.data?.error || error.message || 'Search failed'
+      toast.error(errorMessage)
       setState((prev) => ({
         ...prev,
         loading: false,
-        error: errorMessage,
       }))
     }
   }
@@ -61,7 +60,7 @@ export const usePrices = () => {
       return true
     } catch (error: any) {
       const errorMessage = error.response?.data?.error || error.message || 'Update failed'
-      setState((prev) => ({ ...prev, error: errorMessage }))
+      toast.error(errorMessage)
       return false
     }
   }
@@ -73,7 +72,7 @@ export const usePrices = () => {
       return true
     } catch (error: any) {
       const errorMessage = error.response?.data?.error || error.message || 'Delete failed'
-      setState((prev) => ({ ...prev, error: errorMessage }))
+      toast.error(errorMessage)
       return false
     }
   }

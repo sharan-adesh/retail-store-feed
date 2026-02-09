@@ -27,7 +27,7 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ open, re
         <p>Are you sure you want to delete <strong>{record.product_name || 'this record'}</strong>?</p>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
           <button onClick={onClose} disabled={working}>Cancel</button>
-          <button onClick={handleConfirm} disabled={working} style={{ color: 'white', background: 'red' }}>{working ? 'Deleting...' : 'Delete'}</button>
+          <button onClick={handleConfirm} disabled={working} style={{ color: 'white', background: '#dc3545' }}>{working ? 'Deleting...' : 'Delete'}</button>
         </div>
       </div>
     </div>

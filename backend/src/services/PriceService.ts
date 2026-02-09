@@ -65,7 +65,7 @@ export class PriceService {
     params.push(Number(limit));
     params.push(Number(offset));
 
-    const sql = `SELECT id, store_id, sku, product_name, price, date, created_at, updated_at FROM prices ${where} ORDER BY date DESC LIMIT $${paramIndex++} OFFSET $${paramIndex++}`;
+    const sql = `SELECT id, store_id, sku, product_name, price, date, created_at, updated_at FROM prices ${where} ORDER BY updated_at DESC LIMIT $${paramIndex++} OFFSET $${paramIndex++}`;
 
     try {
       const result = await pool.query(sql, params);

@@ -6,14 +6,13 @@ interface UploadSectionProps {
 }
 
 export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess }) => {
-  const { file, loading, error, success, setFile, upload, reset } = useUpload()
+  const { file, loading, setFile, upload, reset } = useUpload()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const count = await upload()
     if (count !== null) {
       onUploadSuccess?.(count)
-      alert(`Successfully inserted ${count} records`)
       reset()
     }
   }
@@ -32,8 +31,6 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
           {loading ? 'Uploading...' : 'Upload'}
         </button>
       </form>
-      {error && <p style={{ color: 'red', marginTop: '8px' }}>{error}</p>}
-      {success && <p style={{ color: 'green', marginTop: '8px' }}>Upload successful!</p>}
     </section>
   )
 }

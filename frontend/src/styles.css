@@ -13,6 +13,7 @@ body {
     padding: 12px;
     margin-bottom: 16px;
     border-radius: 6px;
+    background-color: #eee;
 }
 
 .search-form input {

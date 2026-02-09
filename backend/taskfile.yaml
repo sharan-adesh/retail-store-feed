@@ -1,0 +1,17 @@
+version: '3'
+silent: true
+tasks:
+  build:
+    desc: Build the application
+    cmds:
+      - npm run build
+
+  run:
+    desc: Run the Node server
+    cmds:
+      - npm start
+
+  default:
+    desc: Default task - runs the server
+    cmds:
+      - task: run

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+silent: true
+output: prefixed
+
+tasks:
+  default:
+    desc: Start all services with Docker Compose
+    cmds:
+      - docker compose up -d
+
+  local:
+    desc: Run backend and frontend locally (requires local PostgreSQL)
+    cmds:
+      - echo "Starting backend in background..."
+      - cd ./backend && npm install && npm start &
+      - echo "Starting frontend in background..."
+      - cd ./frontend && npm install && npm run dev
+
+  infra:
+    desc: Start PostgreSQL container only
+    cmds:
+      - docker compose up postgres -d
+  clean:
+    desc: Stop all Docker services
+    cmds:
+      - docker compose down

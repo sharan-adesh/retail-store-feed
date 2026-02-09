@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px;
+}
+
+.app {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+}
+
+.search-form input {
+    margin-right: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #eee;
+    padding: 6px 8px;
+    text-align: left;
+}

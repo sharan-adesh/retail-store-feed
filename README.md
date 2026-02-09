@@ -24,7 +24,6 @@ A full-stack web application for managing retail pricing records with JWT authen
 - [Running with Docker](#running-with-docker)
 - [API Endpoints](#api-endpoints)
 - [Project Structure](#project-structure)
-- [Documentation](#documentation)
 
 ---
 

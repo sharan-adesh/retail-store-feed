@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { PriceRecord } from '../types/index.js'
+import { Input, Button } from './index.js'
 
 interface EditModalProps {
   open: boolean
@@ -38,35 +39,32 @@ export const EditModal: React.FC<EditModalProps> = ({ open, record, onClose, onS
     <div style={backdropStyle}>
       <div style={modalStyle}>
         <h3>Edit Record #{record.id}</h3>
-        <div style={{ marginBottom: 8 }}>
-          <label>Product name <span style={{ color: 'red' }}>*</span></label>
-          <input
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            style={{ width: '100%' }}
-            placeholder="Enter product name"
-          />
-        </div>
-        <div style={{ marginBottom: 8 }}>
-          <label>Price <span style={{ color: 'red' }}>*</span></label>
-          <input
-            type="number"
-            step="0.01"
-            min="0"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            style={{ width: '100%' }}
-            placeholder="Enter price"
-          />
-        </div>
-        {!isValid && (
-          <p style={{ color: 'red', fontSize: '12px', marginTop: 4 }}>
-            Product name and price are required
-          </p>
-        )}
+        <Input
+          label="Product name"
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
+          placeholder="Enter product name"
+          error={!isValid && productName.trim().length === 0}
+          helperText={!isValid && productName.trim().length === 0 ? 'Product name is required' : undefined}
+        />
+        <Input
+          label="Price"
+          type="number"
+          step="0.01"
+          min="0"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          placeholder="Enter price"
+          error={!isValid && price.trim().length === 0}
+          helperText={!isValid && price.trim().length === 0 ? 'Price is required' : undefined}
+        />
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-          <button onClick={onClose} disabled={saving}>Cancel</button>
-          <button onClick={handleSave} disabled={saving || !isValid}>{saving ? 'Saving...' : 'Save'}</button>
+          <Button onClick={onClose} disabled={saving} variant="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleSave} disabled={saving || !isValid} variant="primary">
+            {saving ? 'Saving...' : 'Save'}
+          </Button>
         </div>
       </div>
     </div>

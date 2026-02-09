@@ -1,5 +1,6 @@
 import React from 'react'
 import { PriceRecord } from '../types/index.js'
+import { Button } from './index.js'
 
 interface ConfirmDeleteModalProps {
   open: boolean
@@ -26,8 +27,8 @@ export const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ open, re
         <h3>Delete Record #{record.id}</h3>
         <p>Are you sure you want to delete <strong>{record.product_name || 'this record'}</strong>?</p>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-          <button onClick={onClose} disabled={working}>Cancel</button>
-          <button onClick={handleConfirm} disabled={working} style={{ color: 'white', background: '#dc3545' }}>{working ? 'Deleting...' : 'Delete'}</button>
+          <Button variant="secondary" onClick={onClose} disabled={working}>Cancel</Button>
+          <Button variant="danger" onClick={handleConfirm} disabled={working}>{working ? 'Deleting...' : 'Delete'}</Button>
         </div>
       </div>
     </div>

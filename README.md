@@ -4,9 +4,16 @@ A full-stack web application for managing retail pricing records with JWT authen
 
 **Tech Stack:** React + TypeScript, Express + Node.js, PostgreSQL
 
-**Architecture Documentation:**
-- [System Context Diagram](docs/context-diagram.md) - Visual overview of system components and data flow
-- [Solution Architecture](docs/solution-architecture.md) - Detailed technical architecture and design decisions
+---
+
+## Expected Deliverables
+
+- [System Context Diagram](docs/context-diagram.md)
+- [Solution Architecture](docs/solution-architecture.md)
+- [Design Decisions](docs/design-decisions.md)
+- [Non-Functional Requirements Considered](docs/non-functional-requirements.md)
+- [Assumptions](docs/assumptions.md)
+- [Source for the Implementation](docs/source-of-implementation.md)
 
 ---
 
@@ -93,7 +100,7 @@ Open your browser to **http://localhost:8085**
 
 ## Running with Docker
 
-### Quick Start (Recommended)
+### Quick Start
 
 From the root directory:
 
@@ -204,13 +211,6 @@ retail-store-pricing-platform/
 
 ---
 
-## Documentation
-
-- **[System Context Diagram](docs/context-diagram.md)** - Visual overview of system components
-- **[Solution Architecture](docs/solution-architecture.md)** - Detailed technical architecture
-
----
-
 ## Security Features
 
 - JWT-based authentication with 7-day token expiry
@@ -228,29 +228,3 @@ retail-store-pricing-platform/
 - Database schema auto-initializes on startup
 - All API responses are JSON
 - Frontend uses Axios with JWT interceptor
-
----
-
-## Troubleshooting
-
-**Port conflicts:**
-```bash
-# Check what's using a port
-lsof -i :8086
-
-# Kill process
-kill -9 <PID>
-```
-
-**Docker issues:**
-```bash
-# Clean rebuild
-docker compose down
-docker compose build --no-cache
-docker compose up
-```
-
-**Database connection errors:**
-- Ensure PostgreSQL is running
-- Check credentials in `backend/.env`
-- Verify database `retail` exists

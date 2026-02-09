@@ -22,6 +22,7 @@ A full-stack web application for managing retail pricing records with JWT authen
 - [Prerequisites](#prerequisites)
 - [Running Locally](#running-locally)
 - [Running with Docker](#running-with-docker)
+- [Screenshots](#screenshots)
 - [API Endpoints](#api-endpoints)
 - [Project Structure](#project-structure)
 
@@ -141,6 +142,23 @@ task           # Start all containers (default)
 task infra     # Start PostgreSQL only
 task clean     # Stop all containers
 ```
+
+---
+
+## Screenshots
+
+### Login & Dashboard
+![Login Page](docs/images/login.png)
+
+![Dashboard](docs/images/feed.png)
+
+### Search & Filter
+![Search Records](docs/images/search.png)
+
+### Record Management
+![Edit Record](docs/images/edit.png)
+
+![Edit Record](docs/images/delete.png)
 
 ---
 

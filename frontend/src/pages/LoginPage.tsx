@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext.js'
+import { Input, Button } from '../components/index.js'
 
 interface LoginResponse {
   token: string
@@ -41,56 +42,43 @@ export const LoginPage: React.FC = () => {
       <div style={formStyle}>
         <h2>{isRegister ? 'Create Account' : 'Login'}</h2>
 
-        {error && <p style={{ color: 'red', marginBottom: 12 }}>{error}</p>}
+        {error && <div style={{ color: '#dc3545', marginBottom: 12, padding: '8px 12px', background: '#ffe6e6', borderRadius: '6px', fontSize: '14px' }}>{error}</div>}
 
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: 12 }}>
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={loading}
-              style={{ width: '100%', padding: 8, boxSizing: 'border-box' }}
-            />
-          </div>
+          <Input
+            type="email"
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
+            error={!!error}
+          />
 
-          <div style={{ marginBottom: 12 }}>
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              disabled={loading}
-              style={{ width: '100%', padding: 8, boxSizing: 'border-box' }}
-            />
-          </div>
+          <Input
+            type="password"
+            label="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
+            error={!!error}
+            helperText={isRegister ? 'Password must be at least 6 characters' : error || undefined}
+          />
 
-          {isRegister && (
-            <p style={{ fontSize: 12, color: '#666', marginBottom: 12 }}>Password must be at least 6 characters</p>
-          )}
-
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            style={{
-              width: '100%',
-              padding: 10,
-              background: '#007BFF',
-              color: 'white',
-              border: 'none',
-              borderRadius: 4,
-              cursor: loading ? 'not-allowed' : 'pointer',
-              opacity: loading ? 0.6 : 1,
-            }}
+            variant="primary"
+            fullWidth
+            style={{ marginTop: '8px' }}
           >
             {loading ? 'Loading...' : isRegister ? 'Sign Up' : 'Login'}
-          </button>
+          </Button>
         </form>
 
-        <p style={{ marginTop: 16, textAlign: 'center' }}>
+        <p style={{ marginTop: 16, textAlign: 'center', fontSize: '14px' }}>
           {isRegister ? 'Already have an account?' : "Don't have an account?"}
           <button
+            type="button"
             onClick={() => {
               setIsRegister(!isRegister)
               setError(null)
@@ -100,10 +88,12 @@ export const LoginPage: React.FC = () => {
             style={{
               border: 'none',
               background: 'none',
-              color: '#007BFF',
+              color: '#007bff',
               cursor: 'pointer',
               marginLeft: 4,
               textDecoration: 'underline',
+              fontSize: '14px',
+              fontWeight: '500',
             }}
           >
             {isRegister ? 'Login' : 'Sign Up'}

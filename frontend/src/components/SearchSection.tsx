@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { usePrices } from '../hooks/usePrices.js'
 import { SearchQuery } from '../types/index.js'
-import { PriceTable, EditModal, ConfirmDeleteModal } from './index.js'
+import { PriceTable, EditModal, ConfirmDeleteModal, Input, Button } from './index.js'
 import { PriceRecord } from '../types/index.js'
 import toast from 'react-hot-toast'
 
@@ -58,28 +58,29 @@ export const SearchSection: React.FC = () => {
   return (
     <section className="card">
       <h2>Search Records</h2>
-      <form onSubmit={handleSubmit} className="search-form">
-        <input
+      <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '12px', marginBottom: '16px', alignItems: 'start' }}>
+
+        <Input
           placeholder="Store ID"
           value={localQuery.store_id || ''}
           onChange={(e) => handleInputChange('store_id', e.target.value)}
           disabled={loading}
         />
-        <input
+        <Input
           placeholder="SKU"
           value={localQuery.sku || ''}
           onChange={(e) => handleInputChange('sku', e.target.value)}
           disabled={loading}
         />
-        <input
+        <Input
           placeholder="Product Name"
           value={localQuery.product_name || ''}
           onChange={(e) => handleInputChange('product_name', e.target.value)}
           disabled={loading}
         />
-        <button type="submit" disabled={loading}>
+        <Button type="submit" disabled={loading}>
           {loading ? 'Searching...' : 'Search'}
-        </button>
+        </Button>
       </form>
 
       <PriceTable records={results} onEdit={handleEdit} onDelete={handleDelete} loading={loading} />

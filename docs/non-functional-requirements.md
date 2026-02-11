@@ -19,14 +19,11 @@
 
 Stateless backend. JWT contains auth. Can spin up multiple instances behind load balancer.
 
-**Bottlenecks:** DB writes, bcrypt CPU, connection pool limit.
-
-**Plan:** Single instance → LB + 2-3 backends (1K-10K) → Read replicas + Redis (10K-50K) → K8s cluster (50K+)
+**Bottlenecks:** DB writes, connection pool limit.
 
 ## Availability
 
 - Docker auto-restarts
-- Schema auto-init
 - Health endpoint: /health
 
 **Future Scope:** Redundancy, backups, disaster recovery.
@@ -35,7 +32,7 @@ Stateless backend. JWT contains auth. Can spin up multiple instances behind load
 
 PostgreSQL ACID. Transactions for uploads. Try-catch at routes. Proper HTTP codes.
 
-**Missing:** Automated backups, monitoring, alerting.
+**Future Scope:** Automated backups, monitoring, alerting.
 
 ## Portability
 
